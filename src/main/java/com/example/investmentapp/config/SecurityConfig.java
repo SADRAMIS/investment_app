@@ -18,9 +18,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/register").permitAll() // Разрешаем доступ к /register без аутентификации
+                        .requestMatchers("/favicon.ico").permitAll()
+                        .anyRequest().authenticated() // Все остальные запросы требуют аутентификации
                 )
-                .formLogin(withDefaults());
+                .formLogin(withDefaults())
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }

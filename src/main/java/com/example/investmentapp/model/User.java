@@ -8,6 +8,10 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "users")
 public class User {
+
+    public User(){
+
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
